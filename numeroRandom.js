@@ -9,8 +9,8 @@ function piensaRandom() {
 
 function comprueba() {
     let numUser = parseInt(document.getElementById("numUser").value);
-    let msg = ""
-        ; console.log(numUser)
+    let msg = "";
+    console.log(numUser)
     if (numUser < num) {
         msg = "El número es más grande";
         intentos++;
