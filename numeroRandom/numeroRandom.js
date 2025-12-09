@@ -20,6 +20,7 @@ function comprueba() {
             intentos++;
         } else {
             msg = "Has acertado el número: " + num + " en " + intentos + " intentos.";
+            intentos++;
         }
     }
     console.log(msg);
