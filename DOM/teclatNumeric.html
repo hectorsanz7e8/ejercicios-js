@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="teclatNumeric.js" defer></script>
+    <style>
+        .tecla{
+            width: 100px;
+            height: 100px;
+            border: 5px solid black;
+            border-radius: 3px;
+            font-size: 40px;
+            color: grey;
+            text-align: center;
+        }
+        #teclado{
+
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo">Teclat Numeric</h1>
+    <div id="teclado">
+
+    </div>
+    <script>
+        let teclado = document.getElementById("teclado");
+
+        for(let i=0; i<10; i++){
+            let tecla = document.createElement("div");
+            tecla.innerHTML = "<p>" + i + "</p>";
+            tecla.className = "tecla";
+
+            if(i%2==0){
+                tecla.style.backgroundColor = "lightblue";
+                tecla.style.color = "white";
+            } 
+            if(i%3==0){
+                tecla.style.backgroundColor = "red";
+                tecla.style.color = "white";
+            } 
+
+            teclado.appendChild(tecla);
+        }
+        
+    </script>
+</body>
+</html>
