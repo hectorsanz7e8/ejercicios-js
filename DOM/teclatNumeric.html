@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="teclatNumeric.js" defer></script>
     <style>
         .tecla{
             width: 100px;
@@ -16,7 +15,9 @@
             text-align: center;
         }
         #teclado{
-
+             display: flex;
+            flex-wrap: wrap;
+            width: 600px;
         }
     </style>
 </head>
@@ -28,7 +29,7 @@
     <script>
         let teclado = document.getElementById("teclado");
 
-        for(let i=0; i<10; i++){
+        for(let i=1; i<51; i++){
             let tecla = document.createElement("div");
             tecla.innerHTML = "<p>" + i + "</p>";
             tecla.className = "tecla";
@@ -41,10 +42,31 @@
                 tecla.style.backgroundColor = "red";
                 tecla.style.color = "white";
             } 
+            if(i%5==0){
+                tecla.style.backgroundColor = "yellow";
+                tecla.style.color = "black";
+            }
+            if (esPrimo(i)) {
+                tecla.style.backgroundColor = "green";
+                tecla.style.color = "white";   
+            }
+    
 
             teclado.appendChild(tecla);
         }
         
+
+        function esPrimo(num) {
+            if (num < 2) return false;        // 0 y 1 no son primos
+            let limite = Math.sqrt(num);      // optimización
+
+            for (let i = 2; i <= limite; i++) {
+                if (num % i === 0) {
+                    return false;             // si es divisible, no es primo
+                }
+            }
+            return true;                       // si no tuvo divisores, es primo
+        }
     </script>
 </body>
 </html>
