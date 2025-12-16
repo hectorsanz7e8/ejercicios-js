@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tecla {
+            width: 100px;
+            height: 100px;
+            border: 5px solid black;
+            border-radius: 50px;
+            font-size: 40px;
+            color: grey;
+            text-align: center;
+        }
+
+        #teclado {
+            display: flex;
+            flex-wrap: wrap;
+            width: 800px;
+        }
+
+        #mitexto {
+            width: 300px;
+            height: 50px;
+            background-color: lightpink;
+        }
+
+        .boton {
+            width: 100px;
+            height: 50px;
+            background-color: lightgreen;
+            border: 2px solid black;
+            text-align: center;
+            line-height: 50px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="titulo">Teclat Lletres</h1>
+    <div id="mitexto"></div>
+    <div class="boton" onclick="borrarLetra()">Borrar letra</div>
+    <div class="boton" onclick="comprovar()">comprovar</div>
+    <div id="teclado">
+
+    </div>
+    <script>
+        let teclado = document.getElementById("teclado");
+
+        // ASCII de 'a' = 65, 'z' = 91
+        for (let i = 65; i <= 91; i++) {
+            let tecla = document.createElement("div");
+            tecla.innerHTML = "<p>" + String.fromCharCode(i) + "</p>";
+            tecla.className = "tecla";
+
+            //añadir evento
+            //tecla.addEventListener("click", esctriveTecla());
+            tecla.setAttribute("onclick", "esctriveTecla('" + String.fromCharCode(i) + "')");
+
+            teclado.appendChild(tecla);
+        }
+        palabraSecreta();
+        let palabra = "";
+        function palabraSecreta() {
+            fetch('https://random-word-api.herokuapp.com/word?lang=es&length=5')
+                .then(response => response.json())
+                .then(data => {
+                    palabra = data[0]; // La API devuelve un array, ej: ["perro"]
+
+                    palabra = palabra.toUpperCase();//pasar a mayusculas
+                    console.log("Tu palabra secreta es:", palabra);
+
+                });
+
+        }
+
+
+
+
+        function esctriveTecla(letra) {
+            console.log(letra);
+            let mitexto = document.getElementById("mitexto");
+            console.log("En mi texto hay " + mitexto.textContent);
+            if (mitexto.textContent.length < 5) {
+                mitexto.textContent += letra;
+                console.log("en mi texto he añadido " + letra + "y ahora hay " + mitexto.textContent);
+            }
+            else {
+                mitexto.style.backgroundColor = "red";
+                console.log("no se puede añadir más letras");
+            }
+
+
+        }
+        function borrarLetra() {
+            let mitexto = document.getElementById("mitexto");
+            if (mitexto.textContent.length > 0) {
+                mitexto.textContent = mitexto.textContent.substring(0, mitexto.textContent.length - 1);
+            }
+
+        }
+        function comprovar() {
+            let mitexto = document.getElementById("mitexto");
+            if (mitexto.textContent == palabra) {
+                mitexto.backgroundColor = "lightgreen";
+                alert("Has acertat!");
+            }
+            else {
+                alert("Intenta-ho de nou!");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
