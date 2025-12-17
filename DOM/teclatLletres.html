@@ -10,8 +10,9 @@
             width: 100px;
             height: 100px;
             border: 5px solid black;
-            border-radius: 50px;
+            border-radius: 50%;
             font-size: 40px;
+            line-height: 30px;
             color: grey;
             text-align: center;
         }
@@ -26,6 +27,7 @@
             width: 300px;
             height: 50px;
             background-color: lightpink;
+            border: 2px solid black;
         }
 
         .boton {
@@ -46,14 +48,15 @@
     <div id="mitexto"></div>
     <div class="boton" onclick="borrarLetra()">Borrar letra</div>
     <div class="boton" onclick="comprovar()">comprovar</div>
+    <div class="boton" onclick="palabraSecreta()">otra palabra</div>
     <div id="teclado">
 
     </div>
     <script>
         let teclado = document.getElementById("teclado");
 
-        // ASCII de 'a' = 65, 'z' = 91
-        for (let i = 65; i <= 91; i++) {
+        // ASCII de 'a' = 65, 'z' = 90
+        for (let i = 65; i <= 90; i++) {
             let tecla = document.createElement("div");
             tecla.innerHTML = "<p>" + String.fromCharCode(i) + "</p>";
             tecla.className = "tecla";
@@ -88,7 +91,8 @@
             console.log("En mi texto hay " + mitexto.textContent);
             if (mitexto.textContent.length < 5) {
                 mitexto.textContent += letra;
-                console.log("en mi texto he añadido " + letra + "y ahora hay " + mitexto.textContent);
+                console.log("en mi texto he añadido " + letra + " y ahora hay " + mitexto.textContent);
+                mitexto.style.backgroundColor ="lightpink";
             }
             else {
                 mitexto.style.backgroundColor = "red";
@@ -101,14 +105,18 @@
             let mitexto = document.getElementById("mitexto");
             if (mitexto.textContent.length > 0) {
                 mitexto.textContent = mitexto.textContent.substring(0, mitexto.textContent.length - 1);
+                mitexto.style.backgroundColor ="lightpink";
             }
-
+            
+ 
         }
         function comprovar() {
             let mitexto = document.getElementById("mitexto");
             if (mitexto.textContent == palabra) {
-                mitexto.backgroundColor = "lightgreen";
+                mitexto.style.backgroundColor = "lightgreen";
                 alert("Has acertat!");
+                mitexto.textContent = mitexto.textContent.substring(0, mitexto.textContent.length - 5);
+                palabraSecreta();
             }
             else {
                 alert("Intenta-ho de nou!");
