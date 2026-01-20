@@ -52,20 +52,41 @@ function animate() {
     controls.update();
     renderer.render(scene, camera);
 }
-//Crear el loader
+
+// ===============================
+// I. CARGA DE MODELOS
+// ===============================
 const loader = new GLTFLoader();
 
-//Cargar el modelo
-loader.load(
-    'florero.glb', 
-    function (gltf) {
-        scene.add(gltf.scene);
-    }, 
-    undefined, 
-    function (error) {
-        console.error("Error al cargar el modelo: ", error);
-    }
-);
+// Objeto 1
+loader.load('florero.glb', (gltf) => {
+    gltf.scene.position.set(0, 0, 0);
+    gltf.scene.rotation.y = Math.PI;
+    scene.add(gltf.scene);
+});
+
+// Objeto 2
+loader.load('tallo.glb', (gltf) => {
+    gltf.scene.position.set(0, 0, 0);
+    gltf.scene.rotation.y = Math.PI;
+    scene.add(gltf.scene);
+});
+
+// Objeto 3
+loader.load('flor.glb', (gltf) => {
+    gltf.scene.position.set(0, 0, 0);
+    gltf.scene.rotation.y = Math.PI;
+    scene.add(gltf.scene);
+});
+
+// Objeto 4
+loader.load('ten.glb', (gltf) => {
+    gltf.scene.position.set(0, 0, 0);
+    gltf.scene.rotation.y = Math.PI;
+    scene.add(gltf.scene);
+});
+
+
 
 animate();
 
